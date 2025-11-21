@@ -409,10 +409,23 @@ namespace StarterAssets
 
         public void 發射子彈事件()
         {
-            Debug.Log("發射子彈");
-            GameObject bb=Instantiate(子彈, 發射點.position, Quaternion.identity);
-            bb.GetComponent<Rigidbody>().linearVelocity = Vector3.forward * Time.deltaTime*1000;
-            Destroy(bb, 3f);
+            Vector3 目標;
+            Vector3 方向;
+            目標 = GameObject.Find("Target").transform.position;
+            if(目標 == null)
+            {
+                Debug.Log("發射子彈");
+                方向 = (目標 - 發射點.position).normalized;
+                發射點.rotation = Quaternion.LookRotation(方向);
+                GameObject bb = Instantiate(子彈, 發射點.position, 發射點.rotation);
+                //bb.GetComponent<Rigidbody>().linearVelocity = Vector3.forward * Time.deltaTime * 1000;
+                bb.GetComponent<Rigidbody>().linearVelocity=方向 * Time.deltaTime * 1000;
+                Destroy(bb, 3f);
+            }
+            else
+            {
+                print("沒找到目標");
+            }
         }
     }
 }
