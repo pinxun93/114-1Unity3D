@@ -1,4 +1,4 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -16,7 +16,6 @@ namespace StarterAssets
     {
         public Transform 發射點;
         public GameObject 子彈;
-
 
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -139,7 +138,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -163,10 +162,11 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            if (Input.GetKeyDown(KeyCode.Mouse0)) { 
-                _animator.SetTrigger("Fire"); }
-               
-            
+            //要開槍
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                _animator.SetTrigger("Fire");
+            }
         }
 
         private void LateUpdate()
@@ -396,36 +396,22 @@ namespace StarterAssets
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
-        public void startFiring()
-        {
-            Debug.Log("開始射擊");
-
-        }
-        public void endFiring()
-        {
-            Debug.Log("結束射擊");
-
-        }
 
         public void 發射子彈事件()
         {
             Vector3 目標;
             Vector3 方向;
             目標 = GameObject.Find("Target").transform.position;
-            if(目標 == null)
+            if (目標 != null)
             {
                 Debug.Log("發射子彈");
                 方向 = (目標 - 發射點.position).normalized;
                 發射點.rotation = Quaternion.LookRotation(方向);
                 GameObject bb = Instantiate(子彈, 發射點.position, 發射點.rotation);
-                //bb.GetComponent<Rigidbody>().linearVelocity = Vector3.forward * Time.deltaTime * 1000;
-                bb.GetComponent<Rigidbody>().linearVelocity=方向 * Time.deltaTime * 1000;
+                bb.GetComponent<Rigidbody>().linearVelocity = 方向 * Time.deltaTime * 100;
                 Destroy(bb, 3f);
             }
-            else
-            {
-                print("沒找到目標");
-            }
         }
+
     }
 }
