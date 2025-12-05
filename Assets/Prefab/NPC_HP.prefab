@@ -476,8 +476,8 @@ Transform:
   m_LocalScale: {x: 1, y: 0.1079, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 164403824667584676}
   - {fileID: 676023712259519655}
+  - {fileID: 164403824667584676}
   m_Father: {fileID: 5826276575316284226}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &4338193091230643766
@@ -664,6 +664,7 @@ GameObject:
   - component: {fileID: 2867683385614212633}
   - component: {fileID: 6363758412401766986}
   - component: {fileID: 4284803779606119763}
+  - component: {fileID: 308385023670198585}
   m_Layer: 8
   m_Name: NPC_HP
   m_TagString: Enemy
@@ -790,6 +791,29 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &308385023670198585
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070041867453919253}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &2185386400767141088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,7 +2181,7 @@ GameObject:
   - component: {fileID: 426918686965953284}
   - component: {fileID: 2940409918351358863}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: HP_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
