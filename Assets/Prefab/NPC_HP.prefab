@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 8219407623515441336}
   - component: {fileID: 8192399233345375540}
   m_Layer: 8
-  m_Name: HP
+  m_Name: HP_Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -769,6 +769,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u76EE\u6A19": {fileID: 0}
   "\u8DDD\u96E2": 5
+  "\u8840\u91CF\u6587\u5B57": {fileID: 2940409918351358863}
+  "\u8840\u91CF": 100
+  "\u8840\u689D": {fileID: 164403824667584676}
 --- !u!195 &4284803779606119763
 NavMeshAgent:
   m_ObjectHideFlags: 0
