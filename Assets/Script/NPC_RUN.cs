@@ -15,7 +15,7 @@ public class NPC_RUN : MonoBehaviour
     int 原始血量;
     public Transform 血條;
     bool 開始攻擊 = false;
-    float 攻擊間距 = 2f;
+    public float 攻擊間距 = 1.2f;
     float 下次可攻擊時間;
 
     void Start()
@@ -24,6 +24,7 @@ public class NPC_RUN : MonoBehaviour
         動畫 = GetComponent<Animator>(); // 對應 Animator
         原始血量 = 血量;
         血量文字.text = 血量.ToString();
+        導航.stoppingDistance = 攻擊間距;
     }
 
     void Update()
@@ -33,7 +34,7 @@ public class NPC_RUN : MonoBehaviour
             導航.SetDestination(目標.position);
             距離 = Vector3.Distance(目標.position, transform.position);
 
-            if (距離 <= 3.1f)
+            if (距離 <= 攻擊間距)
             {
                 動畫.SetBool("iswalk", false);
                 開始攻擊 = true;
@@ -45,7 +46,7 @@ public class NPC_RUN : MonoBehaviour
             }
             if (開始攻擊)
             {
-                if (血量 <= 0) { return; }
+                
                 if (Time.time >= 下次可攻擊時間)
                 {
                     動畫.SetTrigger("isAttack");
@@ -59,6 +60,7 @@ public class NPC_RUN : MonoBehaviour
     {
         if(other.tag == "Bullet")
         {
+            if (血量 <= 0) { return; }
             Destroy(other.gameObject);
             血量--;
             血量文字.text = 血量.ToString();
