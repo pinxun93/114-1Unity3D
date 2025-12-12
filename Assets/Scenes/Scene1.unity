@@ -56265,12 +56265,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 40db3173a05ae3242b1c182a09b0a183, type: 2}
     - target: {fileID: 95060476663339902, guid: 7808f0aeae535744d839b436592d7285, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'Elbow_R'\n\tTransform 'Neck'\n\tTransform
-        'Head'\n\tTransform 'Hand_R'\n\tTransform 'Elbow_R'\n\tTransform 'Neck'\n\tTransform
-        'Head'\n\tTransform 'Hand_R'\n\tTransform 'Elbow_R'\n\tTransform 'Neck'\n\tand
-        more ..."
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 95060476663339902, guid: 7808f0aeae535744d839b436592d7285, type: 3}
       propertyPath: m_ApplyRootMotion
@@ -200987,6 +200982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u767C\u5C04\u9EDE": {fileID: 451747543}
   "\u5B50\u5F48": {fileID: 4521656536187763516, guid: 0ca557005aed9c84aa9073f369770d7b, type: 3}
+  "\u5B50\u5F48\u901F\u5EA6": 100
   MoveSpeed: 8
   SprintSpeed: 2
   RotationSmoothTime: 0.12
@@ -405961,6 +405957,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC3
       objectReference: {fileID: 0}
+    - target: {fileID: 4284803779606119763, guid: 8ed14d55558f7b14da4a988860f6da6d, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5826276575316284226, guid: 8ed14d55558f7b14da4a988860f6da6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.97
@@ -407163,6 +407163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u767C\u5C04\u9EDE": {fileID: 0}
   "\u5B50\u5F48": {fileID: 322799863874229046, guid: 620af7d45cc87f449b4374d68094ec2e, type: 3}
+  "\u5B50\u5F48\u901F\u5EA6": 100
   MoveSpeed: 8
   SprintSpeed: 2
   RotationSmoothTime: 0.12
