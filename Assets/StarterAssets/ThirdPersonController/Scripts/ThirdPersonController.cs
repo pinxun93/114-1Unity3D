@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
+using TMPro;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -17,6 +18,12 @@ namespace StarterAssets
         public Transform 發射點;
         public GameObject 子彈;
         public int 子彈速度 = 100;
+
+        public TextMeshPro 血量文字;
+        public int 血量 = 100;
+        int 原始血量;
+        public Transform 血條;
+        public GameObject 血條組件;
 
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -134,6 +141,8 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+            //血條要對準攝影機
+            血條組件.transform.forward = Camera.main.transform.forward;
         }
 
         private void Start()
@@ -154,6 +163,7 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            原始血量 = 血量;
         }
 
         private void Update()
@@ -167,6 +177,30 @@ namespace StarterAssets
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 _animator.SetTrigger("Fire");
+            }
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "EnemyAttack")
+            {
+                if (血量 <= 0) { return; }
+
+
+                血量--;
+                血量文字.text = 血量.ToString();
+                float 血量比例 = (float)血量 / (float)原始血量;
+                血條.localScale = new Vector3(血量比例, 1, 1);
+                if (血量 <= 0)
+                {
+                    Destroy(this.gameObject, 3f);
+                    _animator.SetTrigger("isDead");
+                }
+                else
+                {
+                    _animator.SetTrigger("isHit");
+                }
             }
         }
 
