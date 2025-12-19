@@ -10,6 +10,7 @@ public class NPC_RUN : MonoBehaviour
     public Transform 目標;
     public float 距離 = 0;
 
+    public GameObject 血條組件;
     public TextMeshPro 血量文字;
     public int 血量 = 100;
     int 原始血量;
@@ -30,6 +31,8 @@ public class NPC_RUN : MonoBehaviour
         {
             目標 = GameObject.FindGameObjectWithTag("Player").transform;
         }
+        //血條要對準攝影機
+        血條組件.transform.forward = Camera.main.transform.forward;
     }
 
     void Update()
