@@ -25,6 +25,11 @@ public class NPC_RUN : MonoBehaviour
         原始血量 = 血量;
         血量文字.text = 血量.ToString();
         導航.stoppingDistance = 攻擊間距;
+        目標 = null;
+        if (目標 == null)
+        {
+            目標 = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 
     void Update()
@@ -43,15 +48,21 @@ public class NPC_RUN : MonoBehaviour
             {
                 動畫.SetBool("iswalk", true);
                 開始攻擊 = false;
+                目標 = GameObject.FindGameObjectWithTag("Player").transform;
+                導航.SetDestination(目標.position);
             }
             if (開始攻擊)
             {
-                
+
                 if (Time.time >= 下次可攻擊時間)
                 {
                     動畫.SetTrigger("isAttack");
                     下次可攻擊時間 = Time.time + 攻擊間距;
                 }
+            }
+            else 
+            {
+                目標 = GameObject.FindGameObjectWithTag("Player").transform;
             }
         }
     }
