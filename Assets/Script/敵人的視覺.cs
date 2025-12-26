@@ -15,6 +15,7 @@ public class 敵人的視覺 : MonoBehaviour
     //由程式建立
     Mesh 視線範圍模型;
     MeshFilter 變形視線範圍;
+    Transform playerPos;
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +52,7 @@ public class 敵人的視覺 : MonoBehaviour
                 扇形頂點[i + 1] = 增強方向 * hit.distance;
                 if (hit.transform.tag == "Player")
                 {
-                    //print("發現玩家");
+                    print("發現玩家");
                     StartCoroutine(發現後的暫停());
                 }
             }
@@ -76,5 +77,6 @@ public class 敵人的視覺 : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         GetComponent<敵人的巡邏>().發現玩家 = true;
+        GetComponent<敵人的巡邏>().玩家位置 = playerPos;
     }
 }

@@ -35,8 +35,8 @@ public class 敵人的巡邏 : MonoBehaviour
             導航.stoppingDistance = 2;
             if (Vector3.Distance(this.transform.position, 玩家位置.position) < 導航.stoppingDistance)
             {
-                動畫控制器.SetTrigger("attack");
-                動畫控制器.SetBool("walk", false);
+                動畫控制器.SetTrigger("isAttack");
+                動畫控制器.SetBool("iswalk", false);
                 //transform.LookAt(玩家位置.position);
                 //transform.eulerAngles = new Vector3(0,transform.eulerAngles.y,0);
                 方向 = this.transform.position - 玩家位置.position;
@@ -56,7 +56,7 @@ public class 敵人的巡邏 : MonoBehaviour
                 else
                 {
                     導航.SetDestination(玩家位置.position);
-                    動畫控制器.SetBool("walk", true);
+                    動畫控制器.SetBool("iswalk", true);
                 }
             }
         }
@@ -72,7 +72,7 @@ public class 敵人的巡邏 : MonoBehaviour
             else
             {
                 //叫動畫控制器，走或跑
-                動畫控制器.SetBool("walk", true);
+                動畫控制器.SetBool("iswalk", true);
             }
         }
 
