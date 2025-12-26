@@ -141,8 +141,6 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
-            //血條要對準攝影機
-            血條組件.transform.forward = Camera.main.transform.forward;
         }
 
         private void Start()
@@ -178,7 +176,8 @@ namespace StarterAssets
             {
                 _animator.SetTrigger("Fire");
             }
-
+            //血條要對準攝影機
+            血條組件.transform.forward = Camera.main.transform.forward;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -186,8 +185,6 @@ namespace StarterAssets
             if (other.tag == "EnemyAttack")
             {
                 if (血量 <= 0) { return; }
-
-
                 血量--;
                 血量文字.text = 血量.ToString();
                 float 血量比例 = (float)血量 / (float)原始血量;

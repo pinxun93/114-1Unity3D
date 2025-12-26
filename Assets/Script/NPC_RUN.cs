@@ -27,16 +27,15 @@ public class NPC_RUN : MonoBehaviour
         血量文字.text = 血量.ToString();
         導航.stoppingDistance = 攻擊間距;
         目標 = null;
-        if (目標 == null)
-        {
-            目標 = GameObject.FindGameObjectWithTag("Player").transform;
-        }
-        //血條要對準攝影機
-        血條組件.transform.forward = Camera.main.transform.forward;
+        //if (目標 == null)
+        //{
+        //    目標 = GameObject.FindGameObjectWithTag("Player").transform;
+        //}
     }
-
     void Update()
     {
+        //血條要對準攝影機
+        血條組件.transform.forward = Camera.main.transform.forward;
         if (目標 != null)
         {
             導航.SetDestination(目標.position);

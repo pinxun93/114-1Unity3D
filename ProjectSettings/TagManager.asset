@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Knife
   - EnemyAttack
+  - Patrol
+  - New tag
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - shelter
   - 
   - 
   - 
