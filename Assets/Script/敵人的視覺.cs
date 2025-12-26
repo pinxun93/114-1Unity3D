@@ -53,6 +53,7 @@ public class 敵人的視覺 : MonoBehaviour
                 if (hit.transform.tag == "Player")
                 {
                     print("發現玩家");
+                    playerPos = hit.transform;
                     StartCoroutine(發現後的暫停());
                 }
             }
