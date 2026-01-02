@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
-using UnityEditor;
 
 public class NPC_RUN : MonoBehaviour
 {
     private NavMeshAgent 導航;
-    private Animator 動畫; // 改為 Animator
+    private Animator 動畫器;
     public Transform 目標;
     public float 距離 = 0;
 
@@ -16,20 +15,22 @@ public class NPC_RUN : MonoBehaviour
     int 原始血量;
     public Transform 血條;
     bool 開始攻擊 = false;
-    public float 攻擊間距 = 1.2f;
+    float 攻擊間距 = 2f;
     float 下次可攻擊時間;
+    public float 攻擊距離 = 1.2f;
+
 
     void Start()
     {
         導航 = GetComponent<NavMeshAgent>();
-        動畫 = GetComponent<Animator>(); // 對應 Animator
+        動畫器 = GetComponent<Animator>();
         原始血量 = 血量;
         血量文字.text = 血量.ToString();
-        導航.stoppingDistance = 攻擊間距;
+        導航.stoppingDistance = 攻擊距離;
         目標 = null;
         //if (目標 == null)
         //{
-        //    目標 = GameObject.FindGameObjectWithTag("Player").transform;
+        //    目標 = GameObject.FindWithTag("Player").transform;
         //}
     }
     void Update()
@@ -39,56 +40,52 @@ public class NPC_RUN : MonoBehaviour
         if (目標 != null)
         {
             導航.SetDestination(目標.position);
-            距離 = Vector3.Distance(目標.position, transform.position);
-
-            if (距離 <= 攻擊間距)
+            距離 = Vector3.Distance(目標.position, this.transform.position);
+            if (距離 <= 攻擊距離)
             {
-                動畫.SetBool("iswalk", false);
+                動畫器.SetBool("iswalk", false);
                 開始攻擊 = true;
             }
             else
             {
-                動畫.SetBool("iswalk", true);
+                動畫器.SetBool("iswalk", true);
                 開始攻擊 = false;
-                目標 = GameObject.FindGameObjectWithTag("Player").transform;
+                目標 = GameObject.FindWithTag("Player").transform;
                 導航.SetDestination(目標.position);
             }
             if (開始攻擊)
             {
-
+                if (血量 <= 0) return;
                 if (Time.time >= 下次可攻擊時間)
                 {
-                    動畫.SetTrigger("isAttack");
+                    動畫器.SetTrigger("isAttack");
                     下次可攻擊時間 = Time.time + 攻擊間距;
                 }
             }
-            else 
-            {
-                目標 = GameObject.FindGameObjectWithTag("Player").transform;
-            }
+        }
+        else
+        {
+           目標 = GameObject.FindWithTag("Player").transform;
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Bullet")
+        if (other.tag == "Bullet")
         {
-            if (血量 <= 0) { return; }
             Destroy(other.gameObject);
             血量--;
             血量文字.text = 血量.ToString();
-            float 血量比例 = (float)血量/(float)原始血量;
-            血條.localScale = new Vector3(血量比例,1,1);
+            float 血量比例 = (float)血量 / (float)原始血量;
+            血條.localScale = new Vector3(血量比例, 1, 1);
             if (血量 <= 0)
             {
-                Destroy(this.gameObject,3f);
-                動畫.SetTrigger("isDead");
+                動畫器.SetTrigger("isDead");
+                Destroy(this.gameObject, 3f);
             }
             else
             {
-                動畫.SetTrigger("isHit");
+                動畫器.SetTrigger("isHit");
             }
         }
     }
-
 }
